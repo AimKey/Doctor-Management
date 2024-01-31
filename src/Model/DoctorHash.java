@@ -10,7 +10,6 @@ import java.util.function.Predicate;
 public class DoctorHash extends HashMap<String, Doctor> {
 
     public DoctorHash() {
-
     }
 
     @Override
@@ -19,12 +18,10 @@ public class DoctorHash extends HashMap<String, Doctor> {
     }
 
     public void add(Doctor n) throws Exception {
-        // Validate stuff
         if (this.containsKey(n.getCode()))
             throw new Exception("Doctor code " + n.getCode() + " is duplicated!");
-        if (n.getCode() == "" || n.getName() == "" || n.getSpecialization() == "" || n.getAvailability() == -1)
-            throw new Exception("Data does not exist");
-        // Put here
+        if ("".equals(n.getCode()) || "".equals(n.getName()) || "".equals(n.getSpecialization()) || n.getAvailability() == -1)
+            throw new Exception("Data must not empty");
         put(n.getCode(), n);
     }
 
@@ -32,9 +29,9 @@ public class DoctorHash extends HashMap<String, Doctor> {
         Doctor temp = this.get(code);
         if (temp == null)
             throw new Exception("Code not exist");
-        if (newName == "")
+        if ("".equals(newName))
             newName = temp.getName();
-        if (newSpec == "")
+        if ("".equals(newSpec))
             newSpec = temp.getSpecialization();
         if (newAvail == -1)
             newAvail = temp.getAvailability();
